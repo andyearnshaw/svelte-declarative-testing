@@ -1,0 +1,61 @@
+{
+  "name": "svelte-declarative-testing",
+  "version": "0.1.0",
+  "description": "A way to mount your Svelte test components declaratively",
+  "type": "module",
+  "module": "src/index.js",
+  "main": "src/index.js",
+  "exports": {
+    "./testing-library": {
+      "types": "./src/components/testing-library/index.d.ts",
+      "default": "./src/components/testing-library/index.js"
+    },
+    "./vitest-browser-svelte": {
+      "types": "./src/components/vitest-browser-svelte/index.d.ts",
+      "default": "./src/components/vitest-browser-svelte/index.js"
+    },
+    "./internal": {
+      "types": "./src/components/internal/index.d.ts",
+      "default": "./src/components/internal/index.js"
+    },
+    "./vitest": {
+      "types": "./src/plugins/index.d.ts",
+      "default": "./src/plugins/vitest.js"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "svelte",
+    "vitest",
+    "test",
+    "testing-library"
+  ],
+  "author": "Andy Earnshaw",
+  "license": "ISC",
+  "dependencies": {
+    "magic-string": "^0.30.21",
+    "ts-essentials": "^10.1.1",
+    "zimmerframe": "^1.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-svelte": "^3.4.1"
+  },
+  "peerDependencies": {
+    "@testing-library/svelte": "^5.3.1",
+    "svelte": "^5.49.0",
+    "vitest": "^4.0.18",
+    "vitest-browser-svelte": "^2.0.2"
+  },
+  "peerDependenciesMeta": {
+    "@testing-library/svelte": {
+      "optional": true
+    },
+    "vitest-browser-svelte": {
+      "optional": true
+    }
+  }
+}
