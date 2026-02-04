@@ -63,7 +63,6 @@ const pre = () =>
         },
       );
 
-      console.log(s.toString());
       return { code: s.toString(), map: s.generateMap({ hires: true }) };
     },
   });
