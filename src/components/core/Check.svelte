@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   /**@import { CheckProps } from './' */
   import { getAddCheck } from './context.js';
 

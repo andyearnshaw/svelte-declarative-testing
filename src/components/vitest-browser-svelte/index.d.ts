@@ -2,6 +2,7 @@ import { RenderResult } from 'vitest-browser-svelte';
 import { Component } from 'svelte';
 import type { BaseTestProps, DescribeProps } from '../core';
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export type CheckFn = (result: RenderResult<Component<any, any>>) => void | Promise<void>;
 
 export type CheckProps = {
