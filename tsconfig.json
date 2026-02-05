@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
     "types": ["vitest/globals"],
     "noEmit": true,
     "rewriteRelativeImportExtensions": true,

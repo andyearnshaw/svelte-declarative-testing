@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`vitest post plugin > produces code that mounts the component and returns a render result 1`] = `"export default function AComponent() {};import { mount } from "svelte"; mount((await import(import.meta.url)).default, { target: document.body });"`;
+
+exports[`vitest pre plugin > produces code with a dummy test suite 1`] = `
+"
+<script>
+  import { Describe, Test, Check } from '../components/core';
+</script>
+<Describe label="A test suite">
+  <Test it="A test case">
+    <Check fn={() => {}} />
+  </Test>
+  <Describe label="A nested test suite">
+    <Test it="A nested test case">
+      <Check fn={() => {}} />
+    </Test>
+  </Describe>
+</Describe>
+<Describe label="Another test suite">
+  <Test it="Another test case">
+    <Check fn={() => {}} />
+  </Test>
+</Describe>
+
+{#if globalThis[Symbol()]}{function () {
+describe("A test suite", () => {
+test("A test case", () => {})
+describe("A nested test suite", () => {
+test("A nested test case", () => {})
+})
+})
+describe("Another test suite", () => {
+test("Another test case", () => {})
+})
+}}{/if}"
+`;

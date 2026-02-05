@@ -18,13 +18,13 @@ import { SourceMapGenerator, SourceMapConsumer } from 'source-map';
  */
 
 const mountCode =
-  'import { mount } from "svelte"; mount((await import(import.meta.url)).default, { target: document.body });';
+  ';import { mount } from "svelte"; mount((await import(import.meta.url)).default, { target: document.body });';
 
 const testFileRegex = /\.(?:test|spec)\.svelte$/;
 const getNameFromAttr = (node, attr) =>
-  node.attributes.find((a) => a.name === attr)?.value?.[0]?.data ?? '(unnamed test)';
+  node.attributes.find((a) => a.name === attr)?.value?.[0]?.data ?? '(unnamed)';
 
-const pre = /**@returns {Plugin}*/ () => ({
+const pre = () => ({
   name: 'transform-svelte-declarative-test',
   filter: {
     id: testFileRegex,
@@ -110,7 +110,7 @@ const pre = /**@returns {Plugin}*/ () => ({
   },
 });
 
-const post = /**@returns {Plugin}*/ () => ({
+const post = () => ({
   name: 'transform-svelte-declarative-test',
   filter: {
     id: testFileRegex,
