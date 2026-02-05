@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noEmit": true,
     "rewriteRelativeImportExtensions": true,
     "allowJs": true,
     "checkJs": true,
@@ -9,6 +10,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
+    "module": "preserve",
     "moduleResolution": "bundler"
   },
   "include": [
