@@ -16,6 +16,6 @@ export default defineConfig({
       requireAssertions: true,
     },
     globals: true,
-    include: ['examples/**/*.{test,spec}.svelte'],
+    include: ['examples/**/*.{test,spec}.svelte', 'src/**/*.{test,spec}.ts'],
   },
 });

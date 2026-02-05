@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["vitest/globals"],
     "noEmit": true,
     "rewriteRelativeImportExtensions": true,
     "allowJs": true,
