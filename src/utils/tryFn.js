@@ -7,6 +7,7 @@
 export default function tryFn(fn, ...args) {
   try {
     return fn(...args);
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return undefined;
   }

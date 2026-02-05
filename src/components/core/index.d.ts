@@ -28,13 +28,13 @@ type RenderResult = {
 
 export type TestProps = BaseTestProps & {
   render: (
-    component: Component<any, any>,
+    component: Component<any, any>, //eslint-disable-line @typescript-eslint/no-explicit-any
     options: unknown,
   ) => RenderResult | Promise<RenderResult>;
 };
 
 export type CheckProps = {
-  fn: (renderResult: any) => void | Promise<void>;
+  fn: (renderResult: any) => void | Promise<void>; //eslint-disable-line @typescript-eslint/no-explicit-any
 };
 
 export declare const Describe: Component<DescribeProps>;
