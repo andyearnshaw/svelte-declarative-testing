@@ -1,22 +1,25 @@
 <script>
   /** @import { DescribeProps } from './' */
   import { describe } from 'vitest';
-  import { setAddTest, setSuiteRenderSnippet } from './context';
+  import { getAddDescribeChild, setAddDescribeChild, setSuiteRenderSnippet } from './context';
+  import tryFn from '../../utils/tryFn.js';
 
   /**@type {DescribeProps}*/
   const { label, todo, only, skip, skipIf, runIf, children, tests } = $props();
 
   /**@type {(() => void | Promise<void>)[]} */
-  const testFns = [];
+  const childFns = [];
 
-  setAddTest((fn) => {
-    testFns.push(fn);
+  const addDescribeToParent = tryFn(getAddDescribeChild);
+
+  setAddDescribeChild((fn) => {
+    childFns.push(fn);
   });
 
   // svelte-ignore state_referenced_locally
   setSuiteRenderSnippet(children);
 
-  $effect(() => {
+  const setupDescribe = () => {
     const describeFn = () => {
       if (skip) return describe.skip;
       if (skipIf) return describe.skipIf(skipIf());
@@ -27,10 +30,16 @@
     };
 
     describeFn()(label, async () => {
-      for (const test of testFns) {
-        await test();
+      for (const child of childFns) {
+        await child();
       }
     });
+  };
+
+  addDescribeToParent?.(setupDescribe);
+
+  $effect(() => {
+    if (!addDescribeToParent) setupDescribe();
   });
 </script>
 

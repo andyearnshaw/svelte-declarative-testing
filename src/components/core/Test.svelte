@@ -1,8 +1,9 @@
 <script>
   /**@import { TestProps } from './index.js' */
   import { test } from 'vitest';
-  import { getAddTest, setAddCheck, getSuiteRenderSnippet } from './context';
+  import { setAddCheck, getSuiteRenderSnippet, getAddDescribeChild } from './context';
   import Wrapper from './Wrapper.svelte';
+  import tryFn from '../../utils/tryFn.js';
 
   /**@type {TestProps} */
   const { it, fails, todo, only, skip, skipIf, runIf, children, checks, render } = $props();
@@ -10,9 +11,8 @@
   /**@type {((result: unknown) => void | Promise<void>)[]} */
   const checkFns = [];
 
-  const addTest = getAddTest();
-
-  const suiteRenderSnippet = getSuiteRenderSnippet();
+  const addTest = tryFn(getAddDescribeChild);
+  const suiteRenderSnippet = tryFn(getSuiteRenderSnippet);
 
   setAddCheck((fn) => {
     checkFns.push(fn);
