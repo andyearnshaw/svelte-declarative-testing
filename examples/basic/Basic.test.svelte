@@ -4,7 +4,7 @@
 
 <Describe label="Basic test">
   {#snippet tests()}
-    <Test it="passes">
+    <Test it="finds the rendered component">
       <button>Click me</button>
 
       {#snippet checks()}
@@ -15,5 +15,21 @@
         />
       {/snippet}
     </Test>
+
+    <Describe label="Nested describe">
+      {#snippet tests()}
+      <Test it="also passes">
+        <button>Click me</button>
+
+        {#snippet checks()}
+          <Check
+            fn={({ getByRole }) => {
+              expect(getByRole('button', { name: 'Click me' })).not.toBe(null);
+            }}
+          />
+        {/snippet}
+      </Test>
+      {/snippet}
+    </Describe>
   {/snippet}
 </Describe>

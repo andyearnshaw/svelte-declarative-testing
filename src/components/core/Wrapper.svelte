@@ -1,5 +1,5 @@
 <script>
-  /**@import type { Snippet } from 'svelte';*/
+  /**@import { Snippet } from 'svelte';*/
 
   /**@type {{ children: Snippet }}*/
   const { children } = $props();

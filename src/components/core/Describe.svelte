@@ -1,12 +1,12 @@
 <script>
   /** @import { DescribeProps } from './' */
   import { describe } from 'vitest';
-  import { setAddTest, setSuiteRenderSnippet } from './context.js';
+  import { setAddTest, setSuiteRenderSnippet } from './context';
 
   /**@type {DescribeProps}*/
   const { label, todo, only, skip, skipIf, runIf, children, tests } = $props();
 
-  /**@type {((result: unknown) => void | Promise<void>)[]} */
+  /**@type {(() => void | Promise<void>)[]} */
   const testFns = [];
 
   setAddTest((fn) => {

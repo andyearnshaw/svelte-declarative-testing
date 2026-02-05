@@ -1,7 +1,7 @@
 <script>
   /**@import { TestProps } from './index.js' */
   import { test } from 'vitest';
-  import { getAddTest, setAddCheck, getSuiteRenderSnippet } from './context.js';
+  import { getAddTest, setAddCheck, getSuiteRenderSnippet } from './context';
   import Wrapper from './Wrapper.svelte';
 
   /**@type {TestProps} */

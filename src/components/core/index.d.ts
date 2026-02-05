@@ -10,28 +10,31 @@ export type ModifierProps = XOR<
   { runIf: () => unknown }
 >;
 
-export type DescribeProps =
-  | {
-      label: string;
-      children?: Snippet;
-      tests: Snippet;
-    }
-  | ModifierProps;
+export type DescribeProps = {
+  label: string;
+  children?: Snippet;
+  tests: Snippet;
+} & ModifierProps;
 
-export type BaseTestProps =
-  | {
-      it: string;
-      children?: Snippet;
-      checks: Snippet;
-    }
-  | XOR<ModifierProps, { fails: boolean }>;
+export type BaseTestProps = {
+  it: string;
+  children?: Snippet;
+  checks: Snippet;
+} & XOR<ModifierProps, { fails: boolean }>;
+
+type RenderResult = {
+  unmount: () => void | Promise<void>;
+};
 
 export type TestProps = BaseTestProps & {
-  render: (result: unknown) => void | Promise<void>;
+  render: (
+    component: Component<any, any>,
+    options: unknown,
+  ) => RenderResult | Promise<RenderResult>;
 };
 
 export type CheckProps = {
-  fn: (result: unknown) => void | Promise<void>;
+  fn: (renderResult: any) => void | Promise<void>;
 };
 
 export declare const Describe: Component<DescribeProps>;

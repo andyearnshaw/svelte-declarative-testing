@@ -1,6 +1,6 @@
 <script>
   /**@import { CheckProps } from './' */
-  import { getAddCheck } from './context.js';
+  import { getAddCheck } from './context';
 
   /**@type {CheckProps} */
   const { fn } = $props();
