@@ -5,7 +5,7 @@
   import tryFn from '../../utils/tryFn.js';
 
   /**@type {DescribeProps}*/
-  const { label, todo, only, skip, skipIf, runIf, children, tests } = $props();
+  const { label, todo, only, skip, skipIf, runIf, children, mount } = $props();
 
   /**@type {(() => void | Promise<void>)[]} */
   const childFns = [];
@@ -17,7 +17,9 @@
   });
 
   // svelte-ignore state_referenced_locally
-  setSuiteRenderSnippet(children);
+  if (mount) {
+    setSuiteRenderSnippet(mount);
+  }
 
   const setupDescribe = () => {
     const describeFn = () => {
@@ -43,4 +45,4 @@
   });
 </script>
 
-{@render tests()}
+{@render children()}

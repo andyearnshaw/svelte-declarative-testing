@@ -6,7 +6,7 @@
   import tryFn from '../../utils/tryFn.js';
 
   /**@type {TestProps} */
-  const { it, fails, todo, only, skip, skipIf, runIf, children, checks, render } = $props();
+  const { it, fails, todo, only, skip, skipIf, runIf, children, mount, render } = $props();
 
   /**@type {((result: unknown) => void | Promise<void>)[]} */
   const checkFns = [];
@@ -30,7 +30,7 @@
     };
 
     testFn()(it, async () => {
-      const result = await render(Wrapper, { children: children ?? suiteRenderSnippet });
+      const result = await render(Wrapper, { children: mount ?? suiteRenderSnippet });
 
       try {
         if (!checkFns.length) {
@@ -53,4 +53,4 @@
   });
 </script>
 
-{@render checks()}
+{@render children()}

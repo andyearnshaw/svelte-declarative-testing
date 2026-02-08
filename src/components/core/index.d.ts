@@ -12,14 +12,14 @@ export type ModifierProps = XOR<
 
 export type DescribeProps = {
   label: string;
-  children?: Snippet;
-  tests: Snippet;
+  children: Snippet;
+  mount?: Snippet;
 } & ModifierProps;
 
 export type BaseTestProps = {
   it: string;
-  children?: Snippet;
-  checks: Snippet;
+  children: Snippet;
+  mount?: Snippet;
 } & XOR<ModifierProps, { fails: boolean }>;
 
 type RenderResult = {
