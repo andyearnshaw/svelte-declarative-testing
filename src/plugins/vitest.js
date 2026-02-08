@@ -131,6 +131,7 @@ const post = () => ({
   },
 });
 
+/**@returns {import('vitest/config').Plugin[]} */
 export default function getPlugins() {
   return [pre(), post()];
 }

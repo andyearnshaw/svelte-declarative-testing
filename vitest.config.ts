@@ -7,6 +7,22 @@ export default defineConfig({
   logLevel: 'warn',
   plugins: [svelte(), svelteTesting(), getPlugins()],
   test: {
+    projects: [
+      {
+        extends: './vitest.config.ts',
+        test: {
+          name: 'unit',
+          include: ['src/**/*.{test,spec}.ts'],
+        },
+      },
+      {
+        extends: './vitest.config.ts',
+        test: {
+          name: 'examples',
+          include: ['examples/**/*.{test,spec}.svelte'],
+        },
+      },
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
@@ -16,6 +32,5 @@ export default defineConfig({
       requireAssertions: true,
     },
     globals: true,
-    include: ['examples/**/*.{test,spec}.svelte', 'src/**/*.{test,spec}.ts'],
   },
 });
