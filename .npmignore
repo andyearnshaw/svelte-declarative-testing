@@ -1,0 +1,19 @@
+# Test files and coverage
+coverage/
+examples/
+*.test.ts
+*.test.js
+*.test.svelte
+vitest.config.ts
+
+# Config files
+eslint.config.js
+tsconfig.json
+
+# Misc
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+node_modules/
