@@ -45,25 +45,25 @@ Your tests can look like this:
 </script>
 
 <Test it="opens the menu when the trigger is clicked">
-  <!-- children of the Test are rendered automatically -->
-  <Popover>
-    <PopoverTrigger>Open Menu</PopoverTrigger>
-    <PopoverMenu>
-      <PopoverMenuItem href="/account">Account</PopoverMenuItem>
-      <PopoverMenuItem href="/logout">Log out</PopoverMenuItem>
-    </PopoverMenu>
-  </Popover>
+  <!-- Anything passed via the mount() snippet is rendered for each test -->
+  {#snippet mount()}
+    <Popover>
+      <PopoverTrigger>Open Menu</PopoverTrigger>
+      <PopoverMenu>
+        <PopoverMenuItem href="/account">Account</PopoverMenuItem>
+        <PopoverMenuItem href="/logout">Log out</PopoverMenuItem>
+      </PopoverMenu>
+    </Popover>
+  {/snippet}
 
   <!-- one or more test functions can be provided as checks -->
-  {#snippet checks()}
-    <Check
-      fn={async (screen) => {
-        expect(screen.getByRole('menu', { includeHidden: true })).not.toBeVisible();
-        await screen.getByRole('button', { name: 'Open Menu' }).click();
-        expect(screen.getByRole('menu')).toBeVisible();
-      }}
-    />
-  {/snippet}
+  <Check
+    fn={async (screen) => {
+      expect(screen.getByRole('menu', { includeHidden: true })).not.toBeVisible();
+      await screen.getByRole('button', { name: 'Open Menu' }).click();
+      expect(screen.getByRole('menu')).toBeVisible();
+    }}
+  />
 </Test>
 ```
 
@@ -173,8 +173,8 @@ rendered for each test.
 | Properties | Type       | Description                                                                           |
 | ---------- | ---------- | ------------------------------------------------------------------------------------- |
 | `label`    | `string`   | The descriptive label for the test suite                                              |
-| `children` | `Snippet`  | Any component(s) that you wish to render for the tests                                |
-| `tests`    | `Snippet`  | A snippet block containing one or more `<Test>` elements                              |
+| `mount`    | `Snippet`  | Any component(s) that you wish to render for the tests                                |
+| `children` | `Snippet`  | A snippet block containing one or more `<Test>` elements                              |
 | `skip`     | `any`      | Skips the suite if truthy, just like `describe.skip()`                                |
 | `only`     | `any`      | Only run this suite if truthy, just like `describe.only()`                            |
 | `todo`     | `any`      | Mark the suite as todo if truthy, just like `describe.todo()`                         |
@@ -184,17 +184,17 @@ rendered for each test.
 
 ```svelte
 <Describe label="My Integration Tests">
-  <Button>My button</Button>
-
-  {#snippet tests()}
-    <Test it="renders an accessible button">
-      <!-- Test body goes here -->
-    </Test>
-
-    <Test it="does something when I click the button">
-      <!-- Test body goes here -->
-    </Test>
+  {#snippet mount()}
+    <Button>My button</Button>
   {/snippet}
+
+  <Test it="renders an accessible button">
+    <!-- Test body goes here -->
+  </Test>
+
+  <Test it="does something when I click the button">
+    <!-- Test body goes here -->
+  </Test>
 </Describe>
 ```
 
@@ -213,8 +213,8 @@ parent `<Describe>` are rendered.
 | Properties | Type       | Description                                                                      |
 | ---------- | ---------- | -------------------------------------------------------------------------------- |
 | `it`       | `string`   | The description of the test                                                      |
-| `children` | `Snippet`  | Any component(s) that you wish to render for the test                            |
-| `checks`   | `Snippet`  | A snippet block containing one or more `<Check>` elements                        |
+| `mount`    | `Snippet`  | Any component(s) that you wish to render for the test                            |
+| `children` | `Snippet`  | A snippet block containing one or more `<Check>` elements                        |
 | `skip`     | `any`      | Skips the test if truthy, just like `test.skip()`                                |
 | `only`     | `any`      | Only run this test if truthy, just like `test.only()`                            |
 | `todo`     | `any`      | Mark the test as todo if truthy, just like `test.todo()`                         |
@@ -255,7 +255,7 @@ You can provide as many checks as you like and they will run sequentially.
   {#snippet checks()}
     <Check fn={({queryByRole}) => {
       expect(queryByRole("button")).toBeIntheDocument();
-    }/>
+    }}/>
   {/snippet}
 </Describe>
 ```
