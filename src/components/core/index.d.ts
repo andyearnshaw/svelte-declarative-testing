@@ -1,26 +1,41 @@
 import type { Snippet, Component } from 'svelte';
-import { XOR } from 'ts-essentials';
 
-export type ModifierProps = XOR<
-  /* These are all mutually exclusive */
-  { only: boolean },
-  { todo: boolean },
-  { skip: boolean },
-  { skipIf: () => unknown },
-  { runIf: () => unknown }
->;
+type KeysAsExclusiveUnion<T> = {
+  [K in keyof T]: { [P in K]: T[P] } & { [P in Exclude<keyof T, K>]?: never };
+}[keyof T];
+
+export type ModifierProps = {
+  /* These are all mutually exclusive on Describe and Test */
+  only?: boolean;
+  todo?: boolean;
+  skip?: boolean;
+  skipIf?: () => boolean;
+  runIf?: () => boolean;
+  fails?: boolean;
+};
+
+type ModifiersWithoutFails = Omit<ModifierProps, 'fails'>;
+
+type DescribeModifierProps =
+  | KeysAsExclusiveUnion<ModifiersWithoutFails>
+  | { [K in keyof ModifiersWithoutFails]?: never };
+
+type TestModifierProps =
+  | KeysAsExclusiveUnion<ModifierProps>
+  | { [K in keyof ModifierProps]?: never };
 
 export type DescribeProps = {
   label: string;
   children: Snippet;
   mount?: Snippet;
-} & ModifierProps;
+  fails?: never;
+} & DescribeModifierProps;
 
 export type BaseTestProps = {
   it: string;
   children: Snippet;
   mount?: Snippet;
-} & XOR<ModifierProps, { fails: boolean }>;
+} & TestModifierProps;
 
 type RenderResult = {
   unmount: () => void | Promise<void>;

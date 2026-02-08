@@ -1,5 +1,4 @@
-<script>
-  import { fireEvent } from '@testing-library/svelte';
+<script lang="ts">
   import { Test, Describe, Check } from '../../src/components/testing-library';
 </script>
 

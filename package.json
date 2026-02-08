@@ -37,7 +37,6 @@
   "dependencies": {
     "magic-string": "^0.30.21",
     "source-map": "^0.7.6",
-    "ts-essentials": "^10.1.1",
     "zimmerframe": "^1.1.4"
   },
   "devDependencies": {
