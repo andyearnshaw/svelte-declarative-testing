@@ -18,7 +18,7 @@ import { SourceMapGenerator, SourceMapConsumer } from 'source-map';
  */
 
 const mountCode =
-  ';import { mount } from "svelte"; mount((await import(import.meta.url)).default, { target: document.body });';
+  ';import { mount } from "svelte"; mount((await import(/* @vite-ignore */import.meta.url)).default, { target: document.body });';
 
 const testFileRegex = /\.(?:test|spec)\.svelte$/;
 const getNameFromAttr = (node, attr) =>
