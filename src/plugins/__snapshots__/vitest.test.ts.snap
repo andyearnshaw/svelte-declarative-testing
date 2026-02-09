@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`vitest post plugin > produces code that mounts the component and returns a render result 1`] = `"export default function AComponent() {};import { mount } from "svelte"; mount((await import(/* @vite-ignore */import.meta.url)).default, { target: document.body });"`;
+exports[`vitest post plugin > produces code that mounts the component and returns a render result 1`] = `"export default function AComponent() {};import { mount as svelte_declarative_testing_mount } from "svelte";svelte_declarative_testing_mount(AComponent_test, { target: document.body });"`;
 
 exports[`vitest pre plugin > produces code with a dummy test suite 1`] = `
 "

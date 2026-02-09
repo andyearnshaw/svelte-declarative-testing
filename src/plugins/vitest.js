@@ -17,8 +17,8 @@ import { SourceMapGenerator, SourceMapConsumer } from 'source-map';
  *    imported so that the tests run.
  */
 
-const mountCode =
-  ';import { mount } from "svelte"; mount((await import(/* @vite-ignore */import.meta.url)).default, { target: document.body });';
+const getMountCode = (/**@type {string}*/ name) =>
+  `;import { mount as svelte_declarative_testing_mount } from "svelte";svelte_declarative_testing_mount(${name}, { target: document.body });`;
 
 const testFileRegex = /\.(?:test|spec)\.svelte$/;
 const getNameFromAttr = (node, attr) =>
@@ -123,9 +123,10 @@ const post = () => ({
 
     const s = new MagicString(code);
 
-    // We mount by reimporting the default export of the Svelte file (the
-    // component). This is the magic that runs the tests.
-    s.append(mountCode);
+    // TODO: find a more robust way to get the component name
+    const name = id.split('/').pop().replace('.svelte', '').replace(/\./g, '_');
+
+    s.append(getMountCode(name));
 
     return { code: s.toString() };
   },
